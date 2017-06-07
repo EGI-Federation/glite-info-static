@@ -62,28 +62,28 @@ make -f Makefile-build-docker rpm
 
 ## Changelog
 
-0.1 (02/02/2010):
-  - First draft
-0.2 (03/02/2010):
-  - Renamed the script from glite-info-static-create.sh to glite-info-create.sh
-  - Help info embedded into the script (Laurence's request)
-  - Use getops and parse more arguments (template name, cfg file path, etc.)
-  - Improve script error handling and do more existence checks
-0.3 (15/02/2010):
-  - Fixed warning when a file didn't existed
-  - Fixed problem: variable names in the middle of a line where not substituted
-  - Able to use several .cfg files in one invocation
-  - Now config files are at the script directory level, not inside the module
-  - Directory renamed from glite-info-static-create to glite-info-create
-  - Now the script changes to its directory wherever it is invoked from
-  - Added more debug messages
-0.4 (16/02/2010):
-  - Now the default path for modules is hardcoded to: /etc/glite-info-create/
-  - A new switch (-p) has been added to change the modules path
-  - You can use several interfaces at once
-0.5 (19/02/2010):
-  - New option -o to change the output directory
-  - Check for output directory existance, if it doesn't exist, create it
-  - New option -v sets verbose mode: (0:ERROR, 1:WARNING, 2:INFO, 3:DEBUG)
-  - Now all messages will be copied to syslog
-  - Output successful messages: first the path, then list of files
+* 0.1 (02/02/2010):
+  * First draft
+* 0.2 (03/02/2010):
+  * Renamed the script from glite-info-static-create.sh to glite-info-create.sh
+  * Help info embedded into the script (Laurence's request)
+  * Use getops and parse more arguments (template name, cfg file path, etc.)
+  * Improve script error handling and do more existence checks
+* 0.3 (15/02/2010):
+  * Fixed warning when a file didn't existed
+  * Fixed problem: variable names in the middle of a line where not substituted
+  * Able to use several .cfg files in one invocation
+  * Now config files are at the script directory level, not inside the module
+  * Directory renamed from glite-info-static-create to glite-info-create
+  * Now the script changes to its directory wherever it is invoked from
+  * Added more debug messages
+* 0.4 (16/02/2010):
+  * Now the default path for modules is hardcoded to: /etc/glite-info-create/
+  * A new switch (-p) has been added to change the modules path
+  * You can use several interfaces at once
+* 0.5 (19/02/2010):
+  * New option -o to change the output directory
+  * Check for output directory existance, if it doesn't exist, create it
+  * New option -v sets verbose mode: (0:ERROR, 1:WARNING, 2:INFO, 3:DEBUG)
+  * Now all messages will be copied to syslog
+  * Output successful messages: first the path, then list of files
