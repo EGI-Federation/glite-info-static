@@ -1,25 +1,30 @@
-Application:  gLite Info Static
-Authors:      David.Horat@cern.ch
-              Laurence.Field@cern.ch
-Version:      0.4 (16/02/2010)
-********************************************************************
+# gLite Info Static
 
-DESCRIPTION
-This application is an information provider that generates information in LDIF format from combining an LDIF template with configuration values.
+Documentation: http://gridinfo-documentation.readthedocs.io
 
+## Authors
 
-USAGE
+* David.Horat@cern.ch
+* Laurence.Field@cern.ch
+
+## Description
+
+This application is an information provider that generates information in LDIF
+format from combining an LDIF template with configuration values.
+
+## Usage
+
 Edit the corresponding .cfg file for your module and fill in the parameters
 needed. Invoke glite-info-static without arguments for help if needed.
 The resulting LDIF files will be created in the output/ directory.
 
+## Core Structure
 
-CORE STRUCTURE
-  glite-info-static             The main script to invoke
-  README.txt                    This file
+* glite-info-static: The main script to invoke
+* README.txt: This file
 
+## Module Structure
 
-MODULE STRUCTURE
   [name].1.cfg                  Config file to be filled out by the sysadmin
   [name]/
     [name].glue.ifc             Interface to comply with GLUE standard
@@ -28,12 +33,35 @@ MODULE STRUCTURE
     [name].glue2.tpl            Template to create an LDIF for GLUE 2.0
 
 
-TODO
-None. :)
-Do you have more suggestions?
-Send us an email to: project-grid-info-support@cern.ch
+## TODO
 
-CHANGELOG
+None. :)
+
+Do you have more suggestions?
+Open an issue!
+
+## Installing from source
+
+```sh
+make install
+```
+
+* Build dependencies: None
+* Runtime dependencies: openldap
+
+## Building packages
+
+* It is possible to easily build pacakges CentOS using the provided
+  `Makefile-build-docker` makefile leveraging the use of docker
+  containers.
+
+```sh
+# Building a CentOS 7 RPM
+make -f Makefile-build-docker rpm
+```
+
+## Changelog
+
 0.1 (02/02/2010):
   - First draft
 0.2 (03/02/2010):
