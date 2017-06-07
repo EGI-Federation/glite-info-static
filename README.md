@@ -21,7 +21,7 @@ The resulting LDIF files will be created in the output/ directory.
 ## Core Structure
 
 * glite-info-static: The main script to invoke
-* README.txt: This file
+* README.md: This file
 
 ## Module Structure
 

@@ -13,7 +13,7 @@ install:
 	@mkdir -p ${prefix}/usr/sbin/
 	@mkdir -p ${prefix}/usr/share/doc/${NAME}-${VERSION}
 	@install -m 0755 sbin/glite-info-static ${prefix}/usr/sbin/
-	@install -m 0644 README.txt ${prefix}/usr/share/doc/${NAME}-${VERSION}/
+	@install -m 0644 README.md ${prefix}/usr/share/doc/${NAME}-${VERSION}/
 
 dist:
 	@mkdir -p  $(build)/$(NAME)-$(VERSION)/
