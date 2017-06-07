@@ -31,12 +31,11 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %attr(0755,root,root) /usr/sbin/glite-info-static
-%doc /usr/share/doc/%{name}-%{version}/README.txt
+%doc /usr/share/doc/%{name}-%{version}/README.md
 
 %changelog
 * Wed Apr 24 2013 Maria Alandes <maria.alandes.pradillo@cern.ch> - 0.2.0-2
 - Added Source URL information
-
 * Thu Apr 8 2010 Laurence Field <laurence.field@cern.ch> - 0.2.0-1
 - Refactored
 * Mon Feb 15 2010 Laurence Field <laurence.field@cern.ch> - 0.1.0-1
