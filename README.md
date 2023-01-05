@@ -26,8 +26,8 @@ The required build dependencies are:
 - rpm-build
 - make
 - rsync
-- python3
-- python3-setuptools
+- python
+- python-setuptools
 
 ```shell
 # Checkout tag to be packaged
@@ -50,7 +50,7 @@ This procedure is not recommended for production deployment, please consider
 using packages.
 
 * Build dependencies: None
-* Runtime dependencies: openldap
+* Runtime dependencies: openldap, python
 
 Get the source by cloning this repository and do a `make install`.
 
