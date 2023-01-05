@@ -6,6 +6,7 @@ Group: System/Monitoring
 License: ASL 2.0
 URL: https://github.com/EGI-Federation/glite-info-static
 Source: %{name}-%{version}.tar.gz
+
 BuildArch: noarch
 BuildRoot: %{_tmppath}/%{name}-%{version}-build
 
