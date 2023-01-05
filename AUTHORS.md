@@ -9,6 +9,7 @@
 
 ## Original Authors
 
+- Maria Alandes Pradillo <maria.alandes.pradillo@cern.ch>
 - Laurence Field <Laurence.field@cern.ch>
 - David Horat <David.Horat@cern.ch>
 
