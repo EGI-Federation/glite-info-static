@@ -42,7 +42,7 @@ def usage():
     sys.stderr.write("Usage: %s -m <module> [OPTIONS] \n" % (sys.argv[0]))
     sys.stderr.write(
             """
-glite-info-static -m <module> [-i <ifaces>] [-t <templates>] [-c <configs>]
+glite-info-static -m <module> [-i <ifaces>] [-t <templates>] [-c <config>]
                               [-p <path>] [-o <outpath>] [-d debug]
 
 Parameters:
@@ -85,7 +85,7 @@ def parse_options():
             config["ifaces"].append(a)
         if o in ("-t", "--templates"):
             config["templates"].append(a)
-        if o in ("-c", "--configs"):
+        if o in ("-c", "--config"):
             config["config"] = a
         if o in ("-m", "--module"):
             config["module"] = a
