@@ -27,7 +27,7 @@ jobs:
         with:
           name: rpms7
           path: |
-            build/RPMS/noarch/glite-info-static-*-1.el7.noarch.rpm
+            build/RPMS/noarch/glite-info-static-*.el7.noarch.rpm
   install-centos7:
     name: Install CentOS 7 RPMs
     needs: build-centos7
@@ -72,7 +72,7 @@ jobs:
         with:
           name: rpms${{ matrix.centos-version }}
           path: |
-            build/RPMS/noarch/glite-info-static-*-1.el${{ matrix.centos-version }}.noarch.rpm
+            build/RPMS/noarch/glite-info-static-*.el${{ matrix.centos-version }}.noarch.rpm
   install:
     strategy:
       matrix:
