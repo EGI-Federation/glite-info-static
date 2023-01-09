@@ -1,7 +1,7 @@
 Name: glite-info-static
 Version: 0.2.0
 Release: 2%{?dist}
-Summary: Core component for the glite-info-static framework.
+Summary: Core component for the static information framework
 Group: System/Monitoring
 License: ASL 2.0
 URL: https://github.com/EGI-Federation/glite-info-static
@@ -17,7 +17,8 @@ Requires: openldap-servers
 Requires: python3
 
 %description
-Core component for the glite-info-static framework.
+This application is an information provider that generates information
+in LDIF format from combining an LDIF template with configuration values.
 
 %prep
 %setup -q
