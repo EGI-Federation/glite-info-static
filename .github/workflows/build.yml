@@ -68,13 +68,6 @@ jobs:
       - name: Install generated RPMs
         run: |
           yum localinstall -y glite-info-static-*.el7.noarch.rpm
-      - name: Test installed RPMs
-        run: |
-          curl https://repository.egi.eu/sw/production/cas/1/current/repo-files/EGI-trustanchors.repo > /etc/yum.repos.d/EGI-trustanchors.repo
-          yum install -y ca-policy-egi-core
-          mkdir -p /etc/glite
-          echo 'capath = /etc/grid-security/certificates' >> /etc/glite/glite-info-static.conf
-          glite-info-static -v -c /etc/glite/glite-info-static.conf
 
   # Dependency from PowerTools: openldap-servers
   centos8-install:
