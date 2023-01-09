@@ -1,0 +1,37 @@
+---
+name: Run tests
+
+on:
+  pull_request:
+
+jobs:
+  # XXX done outside of the matrix due to different container name
+  test-centos7:
+    name: Run tests on CentOS 7
+    runs-on: ubuntu-latest
+    container: quay.io/centos/centos:7
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Run tests
+        run: |
+          cd tests/
+          ./run-tests.sh
+
+  # Use a matrix for CentOS Stream versions
+  test:
+    strategy:
+      matrix:
+        centos-version: [8, 9]
+    name: Run tests on CentOS ${{ matrix.centos-version }}
+    runs-on: ubuntu-latest
+    container: quay.io/centos/centos:stream${{ matrix.centos-version }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Run tests
+        run: |
+          cd tests/
+          ./run-tests.sh
