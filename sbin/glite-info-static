@@ -42,8 +42,8 @@ def usage():
     sys.stderr.write("Usage: %s -m <module> [OPTIONS] \n" % (sys.argv[0]))
     sys.stderr.write(
             """
-glite-info-create.sh -m <module> [-i <ifaces>] [-t <templates>] [-c <configs>]
-                                 [-p <path>] [-o <outpath>] [-d debug]
+glite-info-static -m <module> [-i <ifaces>] [-t <templates>] [-c <configs>]
+                              [-p <path>] [-o <outpath>] [-d debug]
 
 Parameters:
   -m <module>    The module you are using. E.g.: site
@@ -54,8 +54,8 @@ Parameters:
   -d <debug>     Debug level: 0:ERROR, 1:WARNING, 2:INFO, 3:DEBUG. Default: 0
 
 Examples:
-  glite-info-create.sh -m site
-  glite-info-create.sh -m site -i 'glue wlcg' -t glue2 -c /etc/site.cfg
+  glite-info-static -m site
+  glite-info-static -m site -i 'glue wlcg' -t glue2 -c /etc/site.cfg
 
 Web site: http://cern.ch/gridinfo
 """
