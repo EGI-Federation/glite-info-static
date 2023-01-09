@@ -1,16 +1,20 @@
-Name:		glite-info-static
-Version:	0.2.0
-Release:	2%{?dist}
-Summary:	Core component for the glite-info-static framework.
-Group:		System/Monitoring
-License:	ASL 2.0
-# The source for this package was pulled from upstream's vcs.  Use the
-# following commands to generate the tarball:
-#  svn export http://svnweb.cern.ch/guest/gridinfo/glite-info-static/tags/R_0_2_0_2 %{name}-%{version}
-#  tar --gzip -czvf %{name}-%{version}.tar.gz %{name}-%{version} 
-Source:		%{name}-%{version}.src.tgz
-BuildArch:	noarch
-BuildRoot:	%{_tmppath}/%{name}-%{version}-build
+Name: glite-info-static
+Version: 0.2.0
+Release: 2%{?dist}
+Summary: Core component for the glite-info-static framework.
+Group: System/Monitoring
+License: ASL 2.0
+URL: https://github.com/EGI-Federation/glite-info-static
+Source: %{name}-%{version}.tar.gz
+
+BuildArch: noarch
+BuildRoot: %{_tmppath}/%{name}-%{version}-build
+
+BuildRequires: rsync
+BuildRequires: make
+BuildRequires: python-rpm-macros
+Requires: openldap-servers
+Requires: python
 
 %description
 Core component for the glite-info-static framework.
@@ -31,7 +35,10 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %attr(0755,root,root) /usr/sbin/glite-info-static
-%doc /usr/share/doc/%{name}-%{version}/README.md
+%doc %{_docdir}/%{name}-%{version}/README.md
+%doc %{_docdir}/%{name}-%{version}/AUTHORS.md
+%license /usr/share/licenses/%{name}-%{version}/COPYRIGHT
+%license /usr/share/licenses/%{name}-%{version}/LICENSE.txt
 
 %changelog
 * Wed Apr 24 2013 Maria Alandes <maria.alandes.pradillo@cern.ch> - 0.2.0-2

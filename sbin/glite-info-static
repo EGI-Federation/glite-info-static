@@ -3,6 +3,8 @@
 # Copyright (c) Members of the EGEE Collaboration. 2010.
 # See http://www.eu-egee.org/partners/ for details on the copyright
 # holders.
+# Copyright (c) Contributors, see list at
+#    https://github.com/EGI-Federation/glite-info-static/graphs/contributors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +26,7 @@
 # AUTHORS :     David.Horat@cern.ch
 #               Laurence.Field@cern.ch
 #
-# WEB:          http://cern.ch/gridinfo
+# WEB:          https://github.com/EGI-Federation/glite-info-static
 #
 ##############################################################################
 import os
