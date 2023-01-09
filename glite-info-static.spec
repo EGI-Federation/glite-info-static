@@ -12,9 +12,9 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-build
 
 BuildRequires: rsync
 BuildRequires: make
-BuildRequires: python-rpm-macros
+BuildRequires: python3-rpm-macros
 Requires: openldap-servers
-Requires: python
+Requires: python3
 
 %description
 Core component for the glite-info-static framework.
