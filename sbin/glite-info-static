@@ -33,7 +33,6 @@
 import os
 import argparse
 import sys
-import getopt
 import logging
 import textwrap
 
