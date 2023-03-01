@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 ##############################################################################
 # Copyright (c) Members of the EGEE Collaboration. 2010.
 # See http://www.eu-egee.org/partners/ for details on the copyright
@@ -29,7 +29,7 @@
 # WEB:          https://github.com/EGI-Federation/glite-info-static
 #
 ##############################################################################
-from __future__ import print_function
+
 import os
 import argparse
 import sys
@@ -115,7 +115,7 @@ def main(config):
         if index > 0:
             key = line[:index].strip()
             value = line[index + 1 :].strip()
-            if not parameters.has_key(key):
+            if key not in parameters:
                 parameters[key] = []
             parameters[key].append(value)
 
@@ -135,7 +135,7 @@ def main(config):
                     values = value.split(" ")
                 else:
                     values = []
-                if not interface_parameters.has_key(key):
+                if key not in interface_parameters:
                     interface_parameters[key] = []
                 interface_parameters[key].extend(values)
 
@@ -144,7 +144,7 @@ def main(config):
     mandatory_attributes.extend(interface_parameters["MANDATORY_SINGLEVALUED_VARS"])
     mandatory_attributes.extend(interface_parameters["MANDATORY_MULTIVALUED_VARS"])
     for key in mandatory_attributes:
-        if parameters.has_key(key):
+        if key in parameters:
             for value in parameters[key]:
                 if value == "":
                     LOG.error("Mandatory atribute %s does not have a value." % (key))
@@ -162,7 +162,7 @@ def main(config):
     optional_attributes.extend(interface_parameters["OPTIONAL_MULTIVALUED_VARS"])
 
     for key in optional_attributes:
-        if parameters.has_key(key):
+        if key in parameters:
             for value in parameters[key]:
                 if value == "":
                     LOG.error("Optional atribute %s does not have a value." % (key))
@@ -173,7 +173,7 @@ def main(config):
     singlevalued_attributes.extend(interface_parameters["MANDATORY_SINGLEVALUED_VARS"])
     singlevalued_attributes.extend(interface_parameters["OPTIONAL_SINGLEVALUED_VARS"])
     for key in singlevalued_attributes:
-        if parameters.has_key(key):
+        if key in parameters:
             if len(parameters[key]) > 1:
                 LOG.error("Single valued atribute %s has more than one value." % (key))
                 sys.exit(1)
@@ -196,7 +196,7 @@ def main(config):
     # Do the substitution for single valued attributes
     for attribute in singlevalued_attributes:
         # If there is no value then delete the line, otherwise substitute it.
-        if parameters.has_key(attribute):
+        if attribute in parameters:
             for value in parameters[attribute]:
                 if not parameters[attribute] == "":
                     ldif = ldif.replace("$" + attribute, value)
@@ -208,7 +208,7 @@ def main(config):
     # Do the substitution for multivalued attributes
     for attribute in multivalued_attributes:
         # If there is no value then delete the line, otherwise substitute it.
-        if parameters.has_key(attribute):
+        if attribute in parameters:
             end = ldif.find("$" + attribute)
             start = ldif[:end].rfind("\n") + 1
             glue_attribute = ldif[start:end]
