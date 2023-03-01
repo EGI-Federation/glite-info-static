@@ -30,25 +30,26 @@
 #
 ##############################################################################
 
-import os
 import argparse
-import sys
 import logging
+import os
+import sys
 import textwrap
 
 LOG = logging.getLogger("%s" % (sys.argv[0]))
+
 
 def parse_options():
     parser = argparse.ArgumentParser(
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=textwrap.dedent(
             """
-                      Examples:
-                        glite-info-static -m site
-                        glite-info-static -m site -i 'glue wlcg' -t glue2 -c /etc/site.cfg
+               Examples:
+                 glite-info-static -m site
+                 glite-info-static -m site -i 'glue wlcg' -t glue2 -c /etc/site.cfg
 
-                      Web site: http://cern.ch/gridinfo
-                   """
+               Web site: http://cern.ch/gridinfo
+            """
         ),
     )
     parser.add_argument(
