@@ -44,8 +44,8 @@ def parse_options():
         epilog=textwrap.dedent(
             """
                       Examples:
-                        glite-info-create.sh -m site
-                        glite-info-create.sh -m site -i 'glue wlcg' -t glue2 -c /etc/site.cfg
+                        glite-info-static -m site
+                        glite-info-static -m site -i 'glue wlcg' -t glue2 -c /etc/site.cfg
 
                       Web site: http://cern.ch/gridinfo
                    """
