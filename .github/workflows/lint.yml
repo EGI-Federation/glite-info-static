@@ -19,6 +19,11 @@ jobs:
           # Full git history needed to get proper list of changed files
           fetch-depth: 0
 
+      # check file for python
+      - name: to be removed
+        run: |
+          file sbin/glite-info-static
+
       # Runs the Super-Linter action
       - name: Run Super-Linter on new changes
         uses: docker://ghcr.io/github/super-linter:slim-v4
