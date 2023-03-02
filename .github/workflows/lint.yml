@@ -27,15 +27,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MARKDOWN_CONFIG_FILE: .markdownlint.json
           # Only check new or edited files
-          VALIDATE_ALL_CODEBASE: true
+          VALIDATE_ALL_CODEBASE: false
           # Fail on errors
           DISABLE_ERRORS: false
           # shellcheck conf
           SHELLCHECK_OPTS:
             -e SC1090,SC2046,SC2164,SC2166,SC1091,SC2086,SC2001,SC2219,SC2181
-          VALIDATE_PYTHON: true
-          VALIDATE_PYTHON_BLACK: true
-          VALIDATE_PYTHON_FLAKE8: true
-          VALIDATE_PYTHON_ISORT: true
-          VALIDATE_PYTHON_MYPY: true
-          VALIDATE_PYTHON_PYLINT: true
