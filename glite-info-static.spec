@@ -1,6 +1,6 @@
 Name: glite-info-static
-Version: 0.2.0
-Release: 2%{?dist}
+Version: 0.3.0
+Release: 1%{?dist}
 Summary: Core component for the static information framework
 Group: System/Monitoring
 License: ASL 2.0
@@ -42,9 +42,15 @@ rm -rf %{buildroot}
 %license /usr/share/licenses/%{name}-%{version}/LICENSE.txt
 
 %changelog
+* Fri Mar 10 2023 Baptiste Grenier <baptiste.grenier@egi.eu> - 0.3.0-1
+- Python 3 support (#6) (Baptiste Grenier)
+- Replace getopt by argparse (#7) (Enol Fernandez)
+
 * Wed Apr 24 2013 Maria Alandes <maria.alandes.pradillo@cern.ch> - 0.2.0-2
 - Added Source URL information
+
 * Thu Apr 8 2010 Laurence Field <laurence.field@cern.ch> - 0.2.0-1
 - Refactored
+
 * Mon Feb 15 2010 Laurence Field <laurence.field@cern.ch> - 0.1.0-1
 - First release
