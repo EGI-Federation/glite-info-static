@@ -29,113 +29,85 @@
 # WEB:          https://github.com/EGI-Federation/glite-info-static
 #
 ##############################################################################
-import getopt
+
+import argparse
 import logging
 import os
 import sys
+import textwrap
 
-
-def usage():
-    """
-    Funtion to print out the usage
-    """
-    sys.stderr.write("Usage: %s -m <module> [OPTIONS] \n" % (sys.argv[0]))
-    sys.stderr.write(
-            """
-glite-info-static -m <module> [-i <ifaces>] [-t <templates>] [-c <config>]
-                              [-p <path>] [-o <outpath>] [-d debug]
-
-Parameters:
-  -m <module>    The module you are using. E.g.: site
-  -i <ifaces>    The interface you want to use. E.g.: glue, wlcg (default)
-  -t <templates> The template you want to use. E.g.: glue1, glue2 (all default)
-  -c <config>    The config file location if outside from the module directory
-  -p <path>      The path for the module directory. Default: /etc/glite-info-static
-  -d <debug>     Debug level: 0:ERROR, 1:WARNING, 2:INFO, 3:DEBUG. Default: 0
-
-Examples:
-  glite-info-static -m site
-  glite-info-static -m site -i 'glue wlcg' -t glue2 -c /etc/site.cfg
-
-Web site: http://cern.ch/gridinfo
-"""
-    )
+LOG = logging.getLogger("%s" % (sys.argv[0]))
 
 
 def parse_options():
-    global config
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=textwrap.dedent(
+            """
+               Examples:
+                 glite-info-static -m site
+                 glite-info-static -m site -i 'glue wlcg' -t glue2 -c /etc/site.cfg
 
-    config = {}
-    config["debug"] = 0
-    config["ifaces"] = []
-    config["templates"] = []
-    config["path"] = "/etc/glite-info-static"
-    try:
-        opts, args = getopt.getopt(
-            sys.argv[1:],
-            "i:t:c:m:p:d:h",
-            ["ifaces", "templates", "config", "module", "path", "debug", "help"],
-        )
-    except getopt.GetoptError:
-        sys.stderr.write("Error: Invalid option specified.\n")
-        usage()
-        sys.exit(2)
-    for o, a in opts:
-        if o in ("-i", "--ifaces"):
-            config["ifaces"].append(a)
-        if o in ("-t", "--templates"):
-            config["templates"].append(a)
-        if o in ("-c", "--config"):
-            config["config"] = a
-        if o in ("-m", "--module"):
-            config["module"] = a
-        if o in ("-p", "--path"):
-            config["path"] = a
-        if o in ("-d", "--debug"):
-            config["debug"] = a
-        if o in ("-h", "--help"):
-            usage()
-            sys.exit(0)
-
-    try:
-        config["debug"] = int(config["debug"])
-    except ValueError:
-        sys.stderr.write("Error: Invalid logging level.\n")
-        usage()
-        sys.exit(1)
-    if config["debug"] > 3 or config["debug"] < 0:
-        sys.stderr.write("Error: Invalid logging level.\n")
-        usage()
-        sys.exit(1)
-
-    if "module" not in config:
-        sys.stderr.write("Error: Mandatory option -m <module> must be specified.\n")
-        usage()
-        sys.exit(1)
-
-    if "config" not in config:
-        sys.stderr.write("Error: Mandatory option -c <config> must be specified.\n")
-        usage()
-        sys.exit(1)
-
-    if len(config["ifaces"]) == 0:
-        config["ifaces"] = ["glue", "wlcg"]
-
-    if len(config["templates"]) == 0:
-        config["templates"] = ["glue1", "glue2"]
-
-    return
+               Web site: http://cern.ch/gridinfo
+            """
+        ),
+    )
+    parser.add_argument(
+        "-d",
+        "--debug",
+        type=int,
+        choices=[0, 1, 2, 3],
+        help="Debug level: 0:ERROR (default), 1:WARNING, 2:INFO, 3:DEBUG",
+        default=0,
+    )
+    parser.add_argument(
+        "-m", "--module", required=True, help="The module you are using. E.g.: site"
+    )
+    parser.add_argument(
+        "-i",
+        "--ifaces",
+        nargs="+",
+        help="The interface you want to use. E.g.: glue, wlcg (default)",
+        default=["glue", "wlcg"],
+    )
+    parser.add_argument(
+        "-t",
+        "--templates",
+        nargs="+",
+        help="The template you want to use. E.g.: glue1, glue2 (all default)",
+        default=["glue1", "glue2"],
+    )
+    parser.add_argument(
+        "-c",
+        "--configs",
+        required=True,
+        help="The config file location if outside from the module directory",
+    )
+    parser.add_argument(
+        "-p",
+        "--path",
+        help="The path for the module directory. Default: /etc/glite-info-static",
+        default="/etc/glite-info-static",
+    )
+    args = parser.parse_args()
+    config = {
+        "debug": args.debug,
+        "path": args.path,
+        "ifaces": args.ifaces,
+        "templates": args.templates,
+        "config": args.configs,
+        "module": args.module,
+    }
+    return config
 
 
-def main():
-    global config, log
-
+def main(config):
     module = config["module"]
 
     # Get key-values from the configuration file.
     config_file = "%s/%s/%s" % (config["path"], module, config["config"])
     if not os.path.exists(config_file):
-        log.error("Config file %s does not exist." % (config_file))
+        LOG.error("Config file %s does not exist." % (config_file))
         sys.exit(1)
     parameters = {}
     for line in open(config_file).readlines():
@@ -151,7 +123,7 @@ def main():
     for interface in config["ifaces"]:
         interface_file = "%s/%s/%s.%s.ifc" % (config["path"], module, module, interface)
         if not os.path.exists(interface_file):
-            log.error("Interface file %s does not exist." % (interface_file))
+            LOG.error("Interface file %s does not exist." % (interface_file))
             sys.exit(1)
         interface_parameters = {}
         for line in open(interface_file).readlines():
@@ -175,10 +147,10 @@ def main():
         if key in parameters:
             for value in parameters[key]:
                 if value == "":
-                    log.error("Mandatory atribute %s does not have a value." % (key))
+                    LOG.error("Mandatory atribute %s does not have a value." % (key))
                     sys.exit(1)
         else:
-            log.error(
+            LOG.error(
                 "Mandatory attribute %s is not specified in the configuration file"
                 % (key)
             )
@@ -193,7 +165,7 @@ def main():
         if key in parameters:
             for value in parameters[key]:
                 if value == "":
-                    log.error("Optional atribute %s does not have a value." % (key))
+                    LOG.error("Optional atribute %s does not have a value." % (key))
                     sys.exit(1)
 
     # Check that single valued attributes are really single
@@ -203,7 +175,7 @@ def main():
     for key in singlevalued_attributes:
         if key in parameters:
             if len(parameters[key]) > 1:
-                log.error("Single valued atribute %s has more than one value." % (key))
+                LOG.error("Single valued atribute %s has more than one value." % (key))
                 sys.exit(1)
 
     ldif = ""
@@ -212,7 +184,7 @@ def main():
     for template in config["templates"]:
         template_file = "%s/%s/%s.%s.tpl" % (config["path"], module, module, template)
         if not os.path.exists(template_file):
-            log.error("Template file %s does not exist." % (template_file))
+            LOG.error("Template file %s does not exist." % (template_file))
             sys.exit(1)
 
         ldif = open(template_file).read()
@@ -252,14 +224,10 @@ def main():
 
 
 if __name__ == "__main__":
-    global config, log
-
-    parse_options()
-
-    log = logging.getLogger("%s" % (sys.argv[0]))
+    config = parse_options()
     hdlr = logging.StreamHandler(sys.stderr)
     formatter = logging.Formatter("[%(levelname)s]: %(message)s")
     hdlr.setFormatter(formatter)
-    log.addHandler(hdlr)
-    log.setLevel(config["debug"])
-    main()
+    LOG.addHandler(hdlr)
+    LOG.setLevel(config["debug"])
+    main(config)
