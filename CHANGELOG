@@ -8,9 +8,22 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [0.3.0] - 2023-06-10
+
+### Changed
+
+- Python 3 support. Python 2 is no more supported. (#6) (Baptiste Grenier)
+- Replace getopt by argparse (#7) (Enol Fernandez)
+
 ## [0.2.0]
+
+### Added
+
 - Refactored (Maria Alandes)
 - Added source URL information (Maria Alandes)
 
 ## [0.1.0]
+
+### Added
+
 - First Release (Laurence Field)
