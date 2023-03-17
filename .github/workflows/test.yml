@@ -20,14 +20,14 @@ jobs:
           cd tests/
           ./run-tests.sh
 
-  # Use a matrix for CentOS Stream versions
+  # Use a matrix for AlmaLinux versions
   test:
     strategy:
       matrix:
-        centos-version: [8, 9]
-    name: Run tests on CentOS ${{ matrix.centos-version }}
+        almalinux-version: [8, 9]
+    name: Run tests on AlmaLinux ${{ matrix.almalinux-version }}
     runs-on: ubuntu-latest
-    container: quay.io/centos/centos:stream${{ matrix.centos-version }}
+    container: almalinux:${{ matrix.almalinux-version }}
     steps:
       - uses: actions/checkout@v3
         with:
