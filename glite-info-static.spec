@@ -1,5 +1,5 @@
 Name: glite-info-static
-Version: 0.3.0
+Version: 0.3.1
 Release: 1%{?dist}
 Summary: Core component for the static information framework
 Group: System/Monitoring
@@ -42,6 +42,9 @@ rm -rf %{buildroot}
 %license /usr/share/licenses/%{name}-%{version}/LICENSE.txt
 
 %changelog
+* Fri Mar 17 2023 Baptiste Grenier <baptiste.grenier@egi.eu> - 0.3.0-1
+- Build and release packages using AlmaLinux 8 and 9. (#9) (Baptiste Grenier)
+
 * Fri Mar 10 2023 Baptiste Grenier <baptiste.grenier@egi.eu> - 0.3.0-1
 - Python 3 support (#6) (Baptiste Grenier)
 - Replace getopt by argparse (#7) (Enol Fernandez)
