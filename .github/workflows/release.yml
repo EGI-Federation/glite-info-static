@@ -33,6 +33,7 @@ jobs:
             build/RPMS/noarch/glite-info-static-*-1.el9.noarch.rpm
             build/SRPMS/glite-info-static-*-1.el9.src.rpm
 
+
   release9:
     name: Upload AlmaLinux 9 release artefacts
     needs: almalinux9
@@ -49,7 +50,7 @@ jobs:
           echo "rpm_path=${rpm_path}" >> "$GITHUB_OUTPUT"
           echo "src_path=${src_path}" >> "$GITHUB_OUTPUT"
       - name: Attach AlmaLinux 9 RPMs to the release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
